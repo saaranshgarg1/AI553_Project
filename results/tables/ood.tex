@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering\small
+\caption{Detecting unseen generators (\%). Known: A01--A06; unknown: the 11 genuinely new eval generators. A16/A19 re-use the A04/A06 algorithms, so an AUROC near 50 means they are correctly seen as known.}
+\label{tab:ood}
+\begin{tabular}{lcccc}
+\toprule
+Feature & AUROC & EER & A16 AUROC & A19 AUROC \\
+\midrule
+MFCC & 77.9 & 29.6 & 73 & 35 \\
+LFCC & 74.3 & 34.2 & 71 & 28 \\
+w2v-BERT layer 4 (TADA) & 96.6 & 9.3 & 78 & 73 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering\small
+\caption{Attribution accuracy (\%) when test audio passes through a channel the (clean) support set never saw. 13 generators, 1040 test clips.}
+\label{tab:robust}
+\begin{tabular}{lcccc}
+\toprule
+Test channel & MFCC & LFCC & LPCC & w2v-BERT L4 \\
+\midrule
+Clean & 73.2 & 76.8 & 71.0 & 98.0 \\
+8 kHz resample & 51.5 & 49.1 & 14.1 & 92.5 \\
+Uniform 8-bit & 32.7 & 20.6 & 20.2 & 83.6 \\
+$\mu$-law 8-bit & 52.5 & 42.1 & 30.4 & 95.4 \\
+Noise 20 dB & 7.8 & 8.1 & 8.5 & 51.6 \\
+Noise 10 dB & 5.7 & 7.7 & 7.4 & 29.2 \\
+Low-pass 4 kHz & 51.2 & 43.1 & 11.8 & 95.5 \\
+High-pass 4 kHz & 8.2 & 14.6 & 8.6 & 7.7 \\
+MP3 32 kbps & 46.3 & 19.2 & 38.1 & 90.7 \\
+\bottomrule
+\end{tabular}
+\end{table}

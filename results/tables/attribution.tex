@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering\small
+\caption{Attribution accuracy (\%) over the 13 ASVspoof 2019 eval generators (kNN, $k=21$; mean $\pm$ std over 5 splits). ``Unseen speakers'': test speakers never appear in the support set.}
+\label{tab:attr}
+\begin{tabular}{lcc}
+\toprule
+Feature & Random split & Unseen speakers \\
+\midrule
+MFCC & 72.2 $\pm$ 1.1 & 67.6 $\pm$ 3.5 \\
+LFCC & 76.4 $\pm$ 1.0 & 71.4 $\pm$ 1.6 \\
+LFCC 0--4 kHz & 73.9 $\pm$ 1.4 & 70.7 $\pm$ 1.8 \\
+LFCC 4--8 kHz & 84.3 $\pm$ 0.3 & 78.7 $\pm$ 1.8 \\
+LPCC & 71.2 $\pm$ 1.0 & 62.9 $\pm$ 2.5 \\
+LFCC frames + GMM (32 comp.) & 96.6 $\pm$ 0.4 & -- \\
+\textbf{w2v-BERT layer 4 (TADA)} & 97.6 $\pm$ 0.4 & 97.0 $\pm$ 1.0 \\
+\bottomrule
+\end{tabular}
+\end{table}

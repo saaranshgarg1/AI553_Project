@@ -1,0 +1,30 @@
+# environments and caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+app/dist/
+app/tsconfig.tsbuildinfo
+
+# large / re-creatable artefacts
+data/
+features/
+logs/
+submission/
+*.zip
+
+# previous prototype, original authors' repo, course notes (kept locally for reference)
+_archive/
+
+# LaTeX build products
+report/*.aux
+report/*.log
+report/*.out
+report/*.bbl
+report/*.blg
+report/*.toc
+
+# editor / tool state
+.claude/
+app/.claude/

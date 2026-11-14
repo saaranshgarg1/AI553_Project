@@ -22,14 +22,32 @@ generators.
 - `AI_DISCLOSURE.md`: disclosure of AI-tool use
 - `code/`: `tada/` (4 small modules), `scripts/1-4`, `demo.py`, `tests/`
 - `results/`: `results.json` (every number), figures, tables
-- `demo_clips/`: a human clip and a 2025 TTS clip for the live demo
+- `demo_clips/`: human and modern TTS clips, plus one labeled reference example per class (A07–A19 and bonafide)
+- `dashboard.py`: local browser demo with an interactive 2D embedding map
 
 ## Run
-```
-cd code
-pip install -r requirements.txt     # torch 2.6 first (CUDA or CPU build)
-bash run_all.sh                     # download -> features (~15 min on GPU) -> experiments -> figures
-python demo.py                      # needs the extracted features (data/ and features/)
-python demo.py --file ../demo_clips/human.flac
+Run from the directory containing `demo.py` (this checkout's root; `code/` in the submission).
+```bash
+source .venv/bin/activate           # existing local environment
+pip install -r requirements.txt    # torch 2.6 first (CUDA or CPU build)
+bash run_all.sh                    # download -> features (~15 min on GPU) -> experiments -> figures
+python demo.py                     # needs extracted data/ and features/
+python demo.py --file demo_clips/human.flac
+python demo.py --file demo_clips/A07.flac
 python -m pytest -q tests
 ```
+
+## Browser dashboard
+```bash
+source .venv/bin/activate
+streamlit run dashboard.py --server.address localhost --browser.gatherUsageStats false
+```
+Open **http://localhost:8501**. Select a bundled demo clip or upload WAV, FLAC, OGG, or MP3, then press **Locate audio**. Recordings must be 0.2–30 seconds and at most 20 MB. Use WAV or FLAC if another format cannot be decoded.
+
+- Gray circles: labeled reference bank; blue circles/links: 21 neighbors; orange diamond: selected audio. Hover, zoom, or pan; tables provide the same reference details.
+- PCA is fitted once on the reference bank. New embeddings use that same transform. **Neighbors and voting use the original 1,024-dimensional embeddings, not 2D distances.**
+- Curated reference clips use stored embeddings for fast demonstrations. Byte-identical copies (including renamed uploads) are recognized and their UID excluded from voting. Re-encoded copies are not recognized.
+- Custom recordings use frozen w2v-BERT locally. First model load can take time and may download weights if not already cached. Audio is not sent to an external service.
+- The dashboard reports the closest known class and votes, **not confidence or verified origin**. It does not apply `demo.py`'s unknown-generator distance heuristic.
+
+`demo_clips/reference_clips.csv` records each curated clip's UID, label, speaker, hash and source. Examples were sampled deterministically, not selected by prediction correctness. These are reference-bank clips, not independently held-out tests; the encoder itself is not trained here.
